@@ -51,11 +51,12 @@
 - 提供对应系统的.NET运行时下载链接
 - 支持一键下载和安装指导
 
-### 📦 单文件打包支持
-- 支持打包为真正的单文件可执行程序
-- 包含完整的.NET运行时，无需额外安装
+### 📦 最小化单文件打包
+- 支持打包为依赖框架的最小单文件可执行程序
+- 文件大小仅约1MB（相比自包含版本大幅减小）
+- 需要用户预先安装.NET 6.0运行时
+- 程序会自动引导用户安装缺失的依赖
 - 自动化打包脚本，一键生成x64和x86版本
-- 优化的文件大小和启动速度
 
 ## 依赖包
 
@@ -129,25 +130,27 @@ build-single-file.bat
 - 清理之前的构建文件
 - 还原NuGet包
 - 构建项目
-- 生成x64和x86两个版本的单文件可执行程序
+- 生成x64和x86两个版本的最小化单文件可执行程序
 - 显示文件大小信息
 - 自动重命名输出文件
 
 **手动打包命令：**
 
-创建x64版本：
+创建x64最小化版本：
 ```bash
-dotnet publish ChromeDataReader.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:PublishReadyToRun=true -p:IncludeNativeLibrariesForSelfExtract=true
+dotnet publish ChromeDataReader.csproj -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true
 ```
 
-创建x86版本：
+创建x86最小化版本：
 ```bash
-dotnet publish ChromeDataReader.csproj -c Release -r win-x86 --self-contained true -p:PublishSingleFile=true -p:PublishReadyToRun=true -p:IncludeNativeLibrariesForSelfExtract=true
+dotnet publish ChromeDataReader.csproj -c Release -r win-x86 --self-contained false -p:PublishSingleFile=true
 ```
 
 生成的文件位于：
-- x64版本：`publish-single-file/x64/ChromeDataReader-x64.exe` (~155MB)
-- x86版本：`publish-single-file/x86/ChromeDataReader-x86.exe` (~140MB)
+- x64版本：`publish-minimal/x64/ChromeDataReader-Minimal-x64.exe` (~1MB)
+- x86版本：`publish-minimal/x86/ChromeDataReader-Minimal-x86.exe` (~1MB)
+
+**注意**：这些是依赖框架的构建版本，用户需要先安装.NET 6.0运行时。
 
 ## 使用说明
 
@@ -256,6 +259,13 @@ dotnet publish ChromeDataReader.csproj -c Release -r win-x86 --self-contained tr
 
 ## 更新日志
 
+### v1.2 (2025-09-16) - 最小化打包策略
+- ✅ 改为依赖框架的最小化单文件打包
+- ✅ 文件大小从150MB减小到约1MB
+- ✅ 保留.NET框架检测和安装引导功能
+- ✅ 更新打包脚本支持最小化构建
+- ✅ 更新文档说明新的打包策略
+
 ### v1.1 (2025-09-16) - 新增.NET框架检测功能
 - ✅ 新增程序启动时.NET 6.0运行时自动检测
 - ✅ 创建友好的.NET安装引导界面
@@ -282,18 +292,18 @@ dotnet publish ChromeDataReader.csproj -c Release -r win-x86 --self-contained tr
 
 项目已打包为以下格式：
 
-### 🚀 单文件版本（推荐）
+### 🚀 最小化单文件版本（推荐）
 
-1. **ChromeDataReader-SingleFile.exe** - 真正的单文件版本
-   - 文件大小：约 155MB
-   - 包含完整的 .NET 运行时和所有依赖
-   - 真正的"绿色软件"，无需安装任何额外组件
-   - 双击即可运行
+1. **ChromeDataReader-Minimal-x64.exe** - 64位最小化版本
+   - 文件大小：约 1MB
+   - 依赖框架的单文件版本
+   - 需要预先安装.NET 6.0运行时
+   - 程序会自动引导安装缺失依赖
 
-2. **ChromeDataReader-SingleFile-v1.0.zip** - 单文件压缩包
-   - 包含单文件 exe 和使用说明
-   - 文件大小约 64MB（压缩后）
-   - 最佳的分发选择
+2. **ChromeDataReader-Minimal-x86.exe** - 32位最小化版本
+   - 文件大小：约 1MB
+   - 适用于32位系统
+   - 同样需要.NET 6.0运行时支持
 
 ### 📁 多文件版本
 
