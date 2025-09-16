@@ -1,0 +1,5 @@
+rules_C#_claude.md
+/bin
+/obj
+/publish-minimal
+/publish-folder

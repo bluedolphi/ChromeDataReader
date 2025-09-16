@@ -1,0 +1,109 @@
+<Window x:Class="ChromeDataReader.SessionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Session数据详情" Height="600" Width="900"
+        WindowStartupLocation="CenterScreen">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!-- 顶部工具栏 -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10" Background="#F0F0F0">
+            <TextBlock Text="Session数据" VerticalAlignment="Center" FontSize="16" FontWeight="Bold" Margin="10"/>
+            <Button Name="BtnExport" Content="导出" Width="80" Height="30" Margin="5" Click="BtnExport_Click"/>
+            <Button Name="BtnRefresh" Content="刷新" Width="80" Height="30" Margin="5" Click="BtnRefresh_Click"/>
+        </StackPanel>
+        
+        <!-- 主内容区域 -->
+        <Grid Grid.Row="1" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- 左侧Session列表 -->
+            <GroupBox Grid.Column="0" Header="Session列表">
+                <ListBox Name="LstSessions" SelectionChanged="LstSessions_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="5">
+                                <TextBlock Text="{Binding SessionId}" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Domain}" FontSize="10" Foreground="Gray"/>
+                                <TextBlock Text="{Binding CreatedTime, StringFormat='创建: {0:MM-dd HH:mm}'}" FontSize="10" Foreground="Gray"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </GroupBox>
+            
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Background="LightGray"/>
+            
+            <!-- 右侧Session详情 -->
+            <GroupBox Grid.Column="2" Header="Session详情">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Session基本信息 -->
+                    <StackPanel Grid.Row="0" Margin="10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Session ID:" Margin="0,5" FontWeight="Bold"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Name="TxtSessionId" Margin="10,5" TextWrapping="Wrap"/>
+                            
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="域名/来源:" Margin="0,5" FontWeight="Bold"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Name="TxtDomain" Margin="10,5" TextWrapping="Wrap"/>
+                            
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="创建时间:" Margin="0,5" FontWeight="Bold"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" Name="TxtCreatedTime" Margin="10,5"/>
+                            
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="最后访问:" Margin="0,5" FontWeight="Bold"/>
+                            <TextBlock Grid.Row="3" Grid.Column="1" Name="TxtLastAccessTime" Margin="10,5"/>
+                        </Grid>
+                    </StackPanel>
+                    
+                    <!-- Session数据内容 -->
+                    <TabControl Grid.Row="1" Margin="10">
+                        <TabItem Header="数据内容">
+                            <TextBox Name="TxtSessionData" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" 
+                                     IsReadOnly="True" FontFamily="Consolas" FontSize="12"/>
+                        </TabItem>
+                        
+                        <TabItem Header="格式化JSON">
+                            <TextBox Name="TxtFormattedJson" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" 
+                                     IsReadOnly="True" FontFamily="Consolas" FontSize="12"/>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </GroupBox>
+        </Grid>
+        
+        <!-- 底部状态栏 -->
+        <StatusBar Grid.Row="2">
+            <StatusBarItem>
+                <TextBlock Name="TxtStatus" Text="就绪"/>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBlock Name="TxtCount" Text=""/>
+            </StatusBarItem>
+        </StatusBar>
+        
+    </Grid>
+</Window>

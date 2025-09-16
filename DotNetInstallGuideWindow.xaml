@@ -1,0 +1,121 @@
+<Window x:Class="ChromeDataReader.DotNetInstallGuideWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title=".NET 6.0 运行时安装指导" 
+        Height="500" 
+        Width="600"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!-- 标题 -->
+        <TextBlock Grid.Row="0" 
+                   Text="需要安装 .NET 6.0 运行时" 
+                   FontSize="18" 
+                   FontWeight="Bold" 
+                   Foreground="Red"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,20"/>
+        
+        <!-- 系统信息 -->
+        <GroupBox Grid.Row="1" Header="系统信息" Margin="0,0,0,15">
+            <StackPanel Margin="10">
+                <TextBlock x:Name="txtOSInfo" Text="操作系统: " FontSize="12" Margin="0,2"/>
+                <TextBlock x:Name="txtArchitecture" Text="系统架构: " FontSize="12" Margin="0,2"/>
+                <TextBlock x:Name="txtCurrentDotNet" Text="当前.NET: " FontSize="12" Margin="0,2"/>
+            </StackPanel>
+        </GroupBox>
+        
+        <!-- 说明信息 -->
+        <GroupBox Grid.Row="2" Header="安装说明" Margin="0,0,0,15">
+            <StackPanel Margin="10">
+                <TextBlock TextWrapping="Wrap" FontSize="12" Margin="0,2">
+                    <Run Text="本程序需要 .NET 6.0 运行时才能正常运行。请按照以下步骤安装："/>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" FontSize="12" Margin="0,5,0,2">
+                    <Run Text="1. 点击下方的'下载 .NET 6.0 运行时'按钮"/>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" FontSize="12" Margin="0,2">
+                    <Run Text="2. 下载完成后，运行安装程序"/>
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" FontSize="12" Margin="0,2">
+                    <Run Text="3. 安装完成后，重新启动本程序"/>
+                </TextBlock>
+            </StackPanel>
+        </GroupBox>
+        
+        <!-- 下载链接区域 -->
+        <GroupBox Grid.Row="3" Header="下载链接">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="10">
+                    <TextBlock Text="推荐下载链接（适合您的系统）：" FontWeight="Bold" Margin="0,0,0,10"/>
+                    
+                    <Button x:Name="btnDownloadRecommended" 
+                            Content="下载 .NET 6.0 运行时（推荐）"
+                            Height="35"
+                            Margin="0,5"
+                            Background="#0078D4"
+                            Foreground="White"
+                            FontSize="12"
+                            Click="BtnDownloadRecommended_Click"/>
+                    
+                    <TextBlock Text="或者访问官方下载页面：" FontWeight="Bold" Margin="0,15,0,5"/>
+                    
+                    <Button x:Name="btnDownloadOfficial" 
+                            Content="访问 .NET 官方下载页面"
+                            Height="30"
+                            Margin="0,5"
+                            Background="#106EBE"
+                            Foreground="White"
+                            FontSize="11"
+                            Click="BtnDownloadOfficial_Click"/>
+                    
+                    <TextBlock Text="下载链接：" FontWeight="Bold" Margin="0,15,0,5"/>
+                    <TextBox x:Name="txtDownloadUrl" 
+                             IsReadOnly="True"
+                             TextWrapping="Wrap"
+                             Background="#F5F5F5"
+                             Padding="5"
+                             FontSize="10"
+                             Height="60"/>
+                </StackPanel>
+            </ScrollViewer>
+        </GroupBox>
+        
+        <!-- 按钮区域 -->
+        <StackPanel Grid.Row="4" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Right" 
+                    Margin="0,15,0,0">
+            <Button x:Name="btnRecheck" 
+                    Content="重新检测"
+                    Width="80"
+                    Height="30"
+                    Margin="0,0,10,0"
+                    Click="BtnRecheck_Click"/>
+            <Button x:Name="btnIgnore" 
+                    Content="忽略并继续"
+                    Width="100"
+                    Height="30"
+                    Margin="0,0,10,0"
+                    Background="#FFA500"
+                    Foreground="White"
+                    Click="BtnIgnore_Click"/>
+            <Button x:Name="btnExit" 
+                    Content="退出程序"
+                    Width="80"
+                    Height="30"
+                    Background="#DC3545"
+                    Foreground="White"
+                    Click="BtnExit_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
