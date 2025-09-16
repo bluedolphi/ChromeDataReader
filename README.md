@@ -122,7 +122,7 @@ ChromeDataReader.exe
 
 **使用自动化打包脚本：**
 ```bash
-build-single-file.bat
+build-minimal.bat
 ```
 
 这个脚本会：
@@ -244,7 +244,7 @@ dotnet publish ChromeDataReader.csproj -c Release -r win-x86 --self-contained fa
 - **CustomDataManager.cs** - 自定义数据管理器
 - **AdvancedSearchTool.cs** - 高级搜索工具
 - **Models/ChromeInfo.cs** - 数据模型定义
-- **build-single-file.bat** - 自动化打包脚本
+- **build-minimal.bat** - 自动化最小化打包脚本
 
 ## 许可证
 
@@ -272,7 +272,7 @@ dotnet publish ChromeDataReader.csproj -c Release -r win-x86 --self-contained fa
 - ✅ 自动识别用户系统版本和架构（x86/x64）
 - ✅ 提供对应系统的.NET运行时下载链接
 - ✅ 支持一键下载和安装指导
-- ✅ 创建自动化打包脚本（build-single-file.bat）
+- ✅ 创建自动化打包脚本（build-minimal.bat）
 - ✅ 支持同时生成x64和x86版本
 - ✅ 优化项目配置，支持单文件发布
 - ✅ 更新README文档，添加详细使用说明

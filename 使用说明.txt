@@ -38,7 +38,7 @@ Chrome数据读取工具 - 使用说明
 ### 方法2：从源码构建
 1. 确保已安装.NET 6.0 SDK
 2. 克隆或下载项目源码
-3. 在项目目录运行：build-single-file.bat
+3. 在项目目录运行：build-minimal.bat
 4. 在publish-single-file目录找到生成的可执行文件
 
 ## 主要功能
